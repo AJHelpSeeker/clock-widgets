@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body {
+  margin: 0;
+  padding: 20px;
+  font-family: 'Lato', Arial, sans-serif;
+  background: white;
+  text-align: center;
+  overflow: hidden;
+}
+.greeting {
+  font-size: 24px;
+  font-weight: bold;
+  color: #731105;
+  margin-bottom: 10px;
+}
+.welcome {
+  font-size: 16px;
+  color: #333;
+  margin-bottom: 15px;
+}
+.clock {
+  font-size: 18px;
+  color: #731105;
+  font-weight: 600;
+}
+</style>
+</head>
+<body>
+<div class="greeting" id="greeting"></div>
+<div class="welcome">Welcome to your dashboard</div>
+<div class="clock" id="clock"></div>
+
+<script>
+// Get username from URL parameter
+const urlParams = new URLSearchParams(window.location.search);
+const userName = urlParams.get('name') || 'Guest';
+
+// Time-based greeting
+function getGreeting() {
+  const hour = new Date().getHours();
+  if (hour < 12) return 'Good morning';
+  if (hour < 18) return 'Good afternoon';
+  return 'Good evening';
+}
+
+// Update greeting
+document.getElementById('greeting').textContent = getGreeting() + ', ' + userName + '!';
+
+// Update clock
+function updateClock() {
+  const now = new Date();
+  const options = {
+    weekday: 'long',
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+    second: '2-digit'
+  };
+  document.getElementById('clock').textContent = now.toLocaleString('en-US', options);
+}
+
+updateClock();
+setInterval(updateClock, 1000);
+</script>
+</body>
+</html>
