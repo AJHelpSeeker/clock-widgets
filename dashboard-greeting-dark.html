@@ -1,32 +1,25 @@
 <!DOCTYPE html>
-<html style="background: transparent;">
+<html>
 <head>
 <style>
-html, body {
-  background: transparent !important;
-}
 body {
   margin: 0;
-  padding: 0;
+  padding: 15px 20px;
   font-family: 'Lato', Arial, sans-serif;
+  background: transparent;
   text-align: center;
   overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 100px;
 }
 .greeting {
   font-size: 16px;
   font-weight: 400;
-  color: #ffffff !important;
+  color: #ffffff;
   margin-bottom: 5px;
   line-height: 1.4;
 }
 .clock {
   font-size: 14px;
-  color: #d1d5db !important;
+  color: #d1d5db;
   font-weight: 400;
 }
 </style>
@@ -35,18 +28,19 @@ body {
 <div class="greeting" id="greeting"></div>
 <div class="clock" id="clock"></div>
 <script>
+// Get username from URL parameter
 const urlParams = new URLSearchParams(window.location.search);
 const userName = urlParams.get('name') || 'Guest';
-
+// Time-based greeting
 function getGreeting() {
   const hour = new Date().getHours();
   if (hour < 12) return 'Good morning';
   if (hour < 18) return 'Good afternoon';
   return 'Good evening';
 }
-
+// Update greeting
 document.getElementById('greeting').textContent = getGreeting() + ', ' + userName + '! Welcome to your homepage.';
-
+// Update clock
 function updateClock() {
   const now = new Date();
   const options = {
@@ -60,7 +54,6 @@ function updateClock() {
   };
   document.getElementById('clock').textContent = now.toLocaleString('en-US', options).replace(',', ' ·');
 }
-
 updateClock();
 setInterval(updateClock, 1000);
 </script>
